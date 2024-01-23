@@ -4,7 +4,7 @@
  */
 package org.firstinspires.ftc.teamcode.robot_system;
 
-        import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotor;
         import com.qualcomm.robotcore.hardware.HardwareMap;
         import com.qualcomm.robotcore.hardware.TouchSensor;
 
@@ -86,7 +86,7 @@ public class System_ElevatorErection {
      *
      * @param multiplier The multiplier to adjust the power for raising or lowering the elevator.
      */
-    public void raisedAndlowerErection(int multiplier) {
+    public void raisedAndlowerErection(double multiplier) {
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
