@@ -5,50 +5,24 @@
 package org.firstinspires.ftc.teamcode.robot_system;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-        import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
         import com.qualcomm.robotcore.hardware.TouchSensor;
 
 public class System_ElevatorErection {
 
-    /**
-     * Constant representing the number of ticks required for backdrops.
-     */
-    final public static int TICKS_FOR_BACKDROPS = 1;
-
-    /**
-     * Constant representing the number of ticks required for rigging.
-     */
-    final public static int TICKS_FOR_RIGGING = 2;
-
-    /**
-     * Default power setting for motor movements.
-     */
-    final double POWER = 1;
-
-    /**
-     * Configuration name for the right motor.
-     */
     final String RIGHT_MOTOR_CONFIGURE = "erection right motor";
-
-    /**
-     * Configuration name for the left motor.
-     */
     final String LEFT_MOTOR_CONFIGURE = "erection left motor";
 
-    /**
-     * Reference to the right motor.
-     */
+    final public static int TICKS_FOR_BACKDROPS = 1;
+    final public static int TICKS_FOR_RIGGING = 2;
+
+    final double POWER = 1;
+
+
     DcMotor motorRight;
-
-    /**
-     * Reference to the left motor.
-     */
     DcMotor motorLeft;
-
-    /**
-     * Touch sensor for zeroing the elevator position.
-     */
-    TouchSensor erectionSensor;
+//    TouchSensor erectionSensor;
 
     /**
      * Constructor for the System_ElevatorErection class.
@@ -65,7 +39,7 @@ public class System_ElevatorErection {
         motorLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Set motors to zero position
-        setToZero();
+//        setToZero();
 
         // Motor run modes and encoder setup
         motorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -73,6 +47,8 @@ public class System_ElevatorErection {
 
         motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        motorLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motorRight.setTargetPosition(0);
         motorLeft.setTargetPosition(0);
@@ -98,20 +74,17 @@ public class System_ElevatorErection {
      * Stops the elevator and resets motor run modes and positions.
      */
     public void stopErection() {
-        motorRight.setPower(0);
-        motorLeft.setPower(0);
-
         motorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         motorRight.setTargetPosition(motorRight.getCurrentPosition());
         motorLeft.setTargetPosition(motorLeft.getCurrentPosition());
 
-        motorRight.setPower(1);
-        motorLeft.setPower(1);
-
         motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motorRight.setPower(1);
+        motorLeft.setPower(1);
     }
 
     /**
@@ -136,19 +109,19 @@ public class System_ElevatorErection {
     /**
      * Sets the elevator to a zero position using the touch sensor.
      */
-    public void setToZero() {
-        motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        motorLeft.setPower(-0.5);
-        motorRight.setPower(-0.5);
-
-        // Wait until the touch sensor is pressed to set the position to zero
-        while (!erectionSensor.isPressed()) {
-        }
-
-        motorRight.setPower(0);
-        motorLeft.setPower(0);
-    }
+//    public void setToZero() {
+//        motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//
+//        motorLeft.setPower(-0.5);
+//        motorRight.setPower(-0.5);
+//
+//        // Wait until the touch sensor is pressed to set the position to zero
+//        while (!erectionSensor.isPressed()) {
+//        }
+//
+//        motorRight.setPower(0);
+//        motorLeft.setPower(0);
+//    }
 }
 
